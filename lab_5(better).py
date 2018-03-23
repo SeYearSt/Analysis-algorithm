@@ -1,6 +1,3 @@
-A = [9,1,3,4,5,11,10,12]
-print('A =',A)
-
 def sort(A,index):
     left_list = []
     right_list = []
@@ -17,14 +14,21 @@ def sort(A,index):
     A[:] = main_list[:]
     return A.index(main_element)
 
-def get_max_after(A,p):
+def get_max(A,p):
     k = sort(A,0)
     while True:
-        if k == p:
+        if k+1 == p:
             return A[k]
         elif k < p:
             k = sort(A,k+1)
         else: #k > p
             k = sort(A,0)
     print(A[k])
- 
+    
+def main():
+    n = int(input("Enter size of list: "))
+    A = [2*x for x in range(1,n+1)]
+    print('A =',A)
+    pos = int(input("Enter pos maximum after: "))
+    print(get_max(A,pos))
+   
