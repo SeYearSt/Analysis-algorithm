@@ -1,19 +1,47 @@
-import random
-def max_after(list, pos):
-    for i in range(pos):
-        max_pos = 0
-        for j in range(len(list)-i):
-            if list[ max_pos] < list[j]:
-                 max_pos = j
-        if list[ max_pos] != list[len(list)-1-i]:
-            temp = list[n-1-i]
-            list[len(list)-1-i] = list[ max_pos]
-            list[ max_pos] = temp
-    return list[len(list)-pos]
-
-n = int(input("Input size of list: "))
-list = [int(random.random()*10) for x in range(1,n+1)]
-print(list)
-position = int(input("Input position: "))
-print(max_after(list, position))
-print(list)
+def swap(A, i, j):
+    if i != j:
+        temp = A[i]
+        A[i] = A[j]
+        A[j] = temp
+    else:
+        return -1
+ 
+ 
+def part(A, first, last):
+    start = first
+    end = first + 1
+    while end <= last:
+        if A[first] < A[end]:
+            start += 1
+            swap(A, start, end)
+        end += 1
+ 
+    swap(A, first, start)
+    return start
+ 
+ 
+def r_search(A, first, last, k):
+    if first >= last:
+        return -1
+    else:
+        md = part(A, first, last)
+        print(A)
+        if (md + 1 == k):
+            return A[md]
+        elif k < md + 1:
+            #print("left find")
+            return r_search(A, first, md, k)
+        else:
+            #print("right find")
+            return r_search(A, md + 1, last, k)
+ 
+ 
+def main():
+    n = int(input("Enter size of list: "))
+    A = [2 * x for x in range(1, n + 1)]
+    print('A =', A)
+    pos = int(input("Enter pos maximum after: "))
+    print(r_search(A,0,len(A)-1,pos))
+    input("Press any key...")
+ 
+main()
