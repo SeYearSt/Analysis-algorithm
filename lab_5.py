@@ -7,7 +7,7 @@ def swap(A, i, j):
         return -1
  
  
-def part(A, first, last):
+'''def part(A, first, last):
     start = first
     end = first + 1
     while end <= last:
@@ -17,9 +17,20 @@ def part(A, first, last):
         end += 1
  
     swap(A, first, start)
-    return start
- 
- 
+    return start'''
+
+def part(A,first,last):
+    start = first
+    end = len(A)-1
+    mid = A[(first+last)//2]
+    while start <= end:
+        while A[start] > mid:
+            start = start + 1
+        while A[end] < mid:
+            end = end - 1
+        if start != end:
+             swap(A,start,end)
+             
 def r_search(A, first, last, k):
     if first >= last:
         return -1
